@@ -78,3 +78,6 @@ def logout():
 @admin_required
 def admin_panel():
     return "Welcome Admin. You have elevated privileges."
+
+
+
