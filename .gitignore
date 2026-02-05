@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Instance config
+instance/
+
+# Database files
+*.db
+
+# OS junk
+.DS_Store
