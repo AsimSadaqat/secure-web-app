@@ -68,7 +68,7 @@ After successful authentication, a secure session is created.
 - Sessions persist only while the user is logged in
 - Logout properly terminates the session
 
-![Dashboard](screenshots/5-dashboard.png)
+![Dashboard](screenshorts/5-dashborad.png)
 
 ---
 
