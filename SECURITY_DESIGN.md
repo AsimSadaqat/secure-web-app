@@ -12,7 +12,7 @@ and prevent unauthorized access or privilege escalation.
 
 ---
 
-## 2. Authentication:-
+2.Authentication:-
 
 User authentication is implemented using **Flask-Login**.
 
