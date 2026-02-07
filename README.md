@@ -91,31 +91,17 @@ Security design includes:
 ## 🧠 Security Flow (Text-Based Diagram):-
 
 User Request
-|
-v
-Login / Register
-|
-v
-Password Hashing (Werkzeug)
-|
-v
-Authentication (Flask-Login)
-|
-v
-Session Created
-|
-v
-Protected Route Access
-|
-+--> login_required ?
-| |
-| v
-| Authenticated ✔
-|
-+--> admin_required ?
-|
-v
-Role == admin ✔
+   ↓
+Route Access
+   ↓
+Authentication Check (Flask-Login)
+   ↓
+Authorization Check (RBAC Decorator)
+   ↓
+┌───────────────┬────────────────┐
+│ Admin Role    │ User Role      │
+│ Access Granted│ Access Denied  │
+└───────────────┴────────────────┘
 
 This flow ensures authentication occurs before authorization and prevents
 privilege escalation.
