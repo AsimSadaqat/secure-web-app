@@ -45,7 +45,7 @@ Security features include:
 - Password hashing using Werkzeug
 - Prevention of duplicate account creation
 
-![Register Page](screenshots/3-register-page.png)
+![Register Page](screenshorts/3-register-page.png)
 
 ---
 
