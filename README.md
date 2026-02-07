@@ -56,7 +56,7 @@ Registered users can authenticate using their email and password.
 Authentication is handled using **Flask-Login**, and passwords are verified using
 secure hash comparison.
 
-![Login Page](screenshots/4-login-page.png)
+![Login Page](screenshorts/4-login-page.png)
 
 ---
 
