@@ -84,7 +84,7 @@ Security design includes:
 - Authorization checks are performed after authentication
 - Non-admin users are denied access safely
 
-![Admin Page](screenshots/6-admin-page.png)
+![Admin Page](screenshorts/6-admin-page.png)
 
 ---
 
