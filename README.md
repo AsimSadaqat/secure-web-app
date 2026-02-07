@@ -21,7 +21,7 @@ prevent unauthorized access or privilege escalation.
 The project follows Flask best practices with a clear separation of concerns
 between routing, models, forms, security logic, and templates.
 
-![Project Structure](screenshots/1-project-structure.png)
+![Project Structure](screenshorts/1-project-structure.png)
 
 ---
 
