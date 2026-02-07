@@ -29,6 +29,7 @@ of database exposure.
 ---
 
 3.Authorization:-
+
 The application enforces **Role-Based Access Control (RBAC)** to restrict access
 to sensitive functionality.
 
