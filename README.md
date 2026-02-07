@@ -29,7 +29,7 @@ between routing, models, forms, security logic, and templates.
 
 The application runs locally using Flask’s development server.
 
-![Flask Running](screenshots/2-flask-running.png)
+![Flask Running](screenshorts/2-flask-running.png)
 
 ---
 
