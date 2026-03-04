@@ -80,4 +80,3 @@ def admin_panel():
     return "Welcome Admin. You have elevated privileges."
 
 
-
