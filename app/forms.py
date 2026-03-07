@@ -1,52 +1,76 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+
+# SECURITY TESTING CHANGE
+# Originally the application imported strong validators such as:
+# DataRequired, Length, Email, EqualTo.
+#
+# For Week-1 vulnerability testing we intentionally remove most
+# validation rules to simulate weak input validation.
+
+from wtforms.validators import DataRequired
+
 
 class RegisterForm(FlaskForm):
+
     username = StringField(
         "Username",
-        validators=[
-            DataRequired(),
-            Length(min=3, max=150)
-        ]
+
+        # SECURITY WEAKNESS INTRODUCED
+        # Removed Length(min=3, max=150)
+        # Now extremely short or malformed usernames can be submitted.
+        validators=[DataRequired()]
     )
 
     email = StringField(
         "Email",
-        validators=[
-            DataRequired(),
-            Email(),
-            Length(max=150)
-        ]
+
+        # SECURITY WEAKNESS INTRODUCED
+        # Removed Email() validation and max length restriction.
+        # This allows invalid email formats to be submitted.
+        validators=[DataRequired()]
     )
 
     password = PasswordField(
         "Password",
-        validators=[
-            DataRequired(),
-            Length(min=8)
-        ]
+
+        # SECURITY WEAKNESS INTRODUCED
+        # Original secure rule:
+        # Length(min=8)
+        #
+        # Removing this allows extremely weak passwords
+        # such as "1" or "abc".
+        validators=[DataRequired()]
     )
 
     confirm_password = PasswordField(
         "Confirm Password",
-        validators=[
-            DataRequired(),
-            EqualTo("password")
-        ]
+
+        # SECURITY WEAKNESS INTRODUCED
+        # Original secure rule:
+        # EqualTo("password")
+        #
+        # Removing this allows mismatched passwords.
+        validators=[DataRequired()]
     )
 
     submit = SubmitField("Register")
-from wtforms.validators import DataRequired, Email
+
 
 class LoginForm(FlaskForm):
+
     email = StringField(
         "Email",
-        validators=[DataRequired(), Email()]
+
+        # SECURITY WEAKNESS INTRODUCED
+        # Removed Email() validation so malformed input is accepted.
+        validators=[DataRequired()]
     )
 
     password = PasswordField(
         "Password",
+
+        # Minimal validation only
         validators=[DataRequired()]
     )
 

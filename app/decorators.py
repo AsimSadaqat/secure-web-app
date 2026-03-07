@@ -5,16 +5,34 @@ from flask_login import current_user
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        # 1️⃣ Must be logged in
-        if not current_user.is_authenticated:
-            return redirect(url_for("main.login"))
 
-        # 2️⃣ Must be admin
-        if current_user.role != "admin":
-            flash("Access denied: admin only.", "danger")
-            return redirect(url_for("main.dashboard"))
+        # --------------------------------------------------
+        # SECURITY TESTING CHANGE
+        # --------------------------------------------------
+        # Original secure logic checked:
+        #
+        # 1) if user is authenticated
+        # 2) if user role == "admin"
+        #
+        # If the user was not an admin, access to admin routes
+        # such as /admin would be blocked.
+        #
+        # For Week-1 vulnerability testing, the authorization
+        # checks are intentionally bypassed so ANY authenticated
+        # user can access admin functionality.
+        #
+        # This simulates a classic OWASP vulnerability:
+        # Broken Access Control / Privilege Escalation.
+        #
+        # Risk in real systems:
+        # A normal user could gain admin privileges and access
+        # sensitive functionality or data.
+        #
+        # NOTE:
+        # This change exists only in the `week1-insecure-version`
+        # branch for controlled security testing.
+        # --------------------------------------------------
 
-        # 3️⃣ Allowed
         return f(*args, **kwargs)
 
     return decorated_function
