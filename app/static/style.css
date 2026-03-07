@@ -1,0 +1,134 @@
+/* -------- Page Layout -------- */
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+}
+
+/* -------- Card Container -------- */
+
+.container{
+    width:420px;
+    margin:100px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    position:relative;
+    z-index:1;
+}
+
+/* -------- Headings -------- */
+
+h1, h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+/* -------- Form Styling -------- */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-input{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.form-input:focus{
+    outline:none;
+    border-color:#007bff;
+}
+
+/* -------- Buttons -------- */
+
+.btn{
+    display:block;
+    width:100%;
+    padding:10px;
+    background:#1a73e8;
+    color:white;
+    border:none;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#1558b0;
+}
+
+.secondary{
+    width:auto;
+    display:inline-block;
+    background:#6c757d;
+}
+
+.secondary:hover{
+    background:#565e64;
+}
+
+/* -------- Utility Classes -------- */
+
+.center{
+    text-align:center;
+}
+
+/* -------- Homepage Buttons -------- */
+
+.home-buttons{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.home-buttons .btn{
+    width:140px;
+    text-align:center;
+}
+
+/* -------- Feature Section -------- */
+
+.features{
+    margin-top:20px;
+    text-align:center;
+    color:#555;
+}
+
+/* -------- Project Info Section -------- */
+
+.project-info{
+    margin-top:30px;
+    text-align:left;
+    color:#444;
+}
+
+.project-info h3{
+    margin-bottom:10px;
+}
+
+.project-info ul{
+    margin-top:10px;
+    padding-left:20px;
+}
+
+/* -------- Watermark -------- */
+
+.watermark{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) rotate(-25deg);
+    font-size:80px;
+    color:rgba(0,0,0,0.05);
+    pointer-events:none;
+    user-select:none;
+    z-index:0;
+}

@@ -9,11 +9,13 @@ from sqlalchemy.exc import IntegrityError
 main = Blueprint("main", __name__)
 
 
+# Homepage
 @main.route("/")
 def home():
-    return "Secure Web App is running"
+    return render_template("home.html")
 
 
+# Register page
 @main.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
@@ -44,6 +46,7 @@ def register():
     return render_template("register.html", form=form)
 
 
+# Login page
 @main.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -60,12 +63,14 @@ def login():
     return render_template("login.html", form=form)
 
 
+# Dashboard
 @main.route("/dashboard")
 @login_required
 def dashboard():
     return "You are logged in. Session is active."
 
 
+# Logout
 @main.route("/logout")
 @login_required
 def logout():
@@ -73,11 +78,10 @@ def logout():
     return redirect(url_for("main.login"))
 
 
+# Admin panel
 @main.route("/admin")
 @login_required
 @admin_required
 def admin_panel():
     return "Welcome Admin. You have elevated privileges."
-
-
 

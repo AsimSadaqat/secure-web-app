@@ -1,35 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
+{% extends "base.html" %}
 
-    <form method="POST">
-        {{ form.hidden_tag() }}
+{% block content %}
 
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username() }}
-        </p>
+<div class="watermark">
+    Asim Sadaqat<br>
+    Cyber Security Lab
+</div>
 
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email() }}
-        </p>
+<div class="container">
 
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password() }}
-        </p>
+<h2>Register</h2>
 
-        <p>
-            {{ form.confirm_password.label }}<br>
-            {{ form.confirm_password() }}
-        </p>
+<form method="POST">
 
-        <p>{{ form.submit() }}</p>
-    </form>
-</body>
-</html>
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class="btn") }}
+    </div>
+
+</form>
+
+<div class="center">
+    <a href="{{ url_for('main.home') }}" class="btn secondary">Back to Home</a>
+</div>
+
+<p class="center">
+Already have an account?
+<a href="{{ url_for('main.login') }}">Login</a>
+</p>
+
+</div>
+
+{% endblock %}
