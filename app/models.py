@@ -26,3 +26,13 @@ class User(db.Model, UserMixin):
         return f"<User {self.username}>"
 
 
+class SecurityLog(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    event_type = db.Column(db.String(50))  
+    email = db.Column(db.String(150))
+
+    ip_address = db.Column(db.String(50))
+
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)

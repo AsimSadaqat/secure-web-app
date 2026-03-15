@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="watermark">
+    Asim Sadaqat<br>
+    Cyber Security Lab
+</div>
+
+<div class="container">
+
+<h2>Dashboard</h2>
+
+<p>
+Welcome to the Secure Web Application dashboard.
+You are successfully logged in.
+</p>
+
+<div class="features">
+
+<p>✔ Authentication System</p>
+<p>✔ Role-Based Access Control</p>
+<p>✔ Security Testing Environment</p>
+
+</div>
+
+<div class="center" style="margin-top:20px;">
+    <a href="{{ url_for('main.logout') }}" class="btn secondary">Logout</a>
+</div>
+
+</div>
+
+{% endblock %}
