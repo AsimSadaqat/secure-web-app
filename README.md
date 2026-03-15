@@ -21,7 +21,7 @@ prevent unauthorized access or privilege escalation.
 The project follows Flask best practices with a clear separation of concerns
 between routing, models, forms, security logic, and templates.
 
-![Project Structure](screenshots/1-project-structure.png)
+![Project Structure](screenshorts/1-project-structure.png)
 
 ---
 
@@ -29,7 +29,7 @@ between routing, models, forms, security logic, and templates.
 
 The application runs locally using Flask’s development server.
 
-![Flask Running](screenshots/2-flask-running.png)
+![Flask Running](screenshorts/2-flask-running.png)
 
 ---
 
@@ -45,7 +45,7 @@ Security features include:
 - Password hashing using Werkzeug
 - Prevention of duplicate account creation
 
-![Register Page](screenshots/3-register-page.png)
+![Register Page](screenshorts/3-register-page.png)
 
 ---
 
@@ -56,7 +56,7 @@ Registered users can authenticate using their email and password.
 Authentication is handled using **Flask-Login**, and passwords are verified using
 secure hash comparison.
 
-![Login Page](screenshots/4-login-page.png)
+![Login Page](screenshorts/4-login-page.png)
 
 ---
 
@@ -68,7 +68,7 @@ After successful authentication, a secure session is created.
 - Sessions persist only while the user is logged in
 - Logout properly terminates the session
 
-![Dashboard](screenshots/5-dashboard.png)
+![Dashboard](screenshorts/5-dashborad.png)
 
 ---
 
@@ -84,7 +84,7 @@ Security design includes:
 - Authorization checks are performed after authentication
 - Non-admin users are denied access safely
 
-![Admin Page](screenshots/6-admin-page.png)
+![Admin Page](screenshorts/6-admin-page.png)
 
 ---
 

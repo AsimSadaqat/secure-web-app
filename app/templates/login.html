@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
+{% extends "base.html" %}
 
-    <form method="POST">
-        {{ form.hidden_tag() }}
+{% block content %}
 
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email() }}
-        </p>
+<div class="watermark">
+    Asim Sadaqat<br>
+    Cyber Security Lab
+</div>
 
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password() }}
-        </p>
+<div class="container">
 
-        <p>{{ form.submit() }}</p>
-    </form>
-</body>
-</html>
+<h2>Login</h2>
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class="form-input") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class="btn") }}
+    </div>
+
+</form>
+
+<div class="form-group center">
+    <a href="{{ url_for('main.home') }}" class="btn secondary">Back to Home</a>
+</div>
+
+</div>
+
+{% endblock %}

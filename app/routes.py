@@ -1,26 +1,30 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required
-# NOTE: admin_required decorator intentionally NOT imported here
-# This is done to simulate a Broken Access Control vulnerability for security testing.
-
+from .decorators import admin_required
 from .forms import RegisterForm, LoginForm
-from .models import User
+from .models import User, SecurityLog  # Added SecurityLog model for logging events
 from .extensions import db
-from sqlalchemy.exc import IntegrityError
 
 main = Blueprint("main", __name__)
 
 
+# -------------------------------
+# Homepage
+# -------------------------------
 @main.route("/")
 def home():
-    return "Secure Web App is running"
+    return render_template("home.html")
 
 
+# -------------------------------
+# Register
+# -------------------------------
 @main.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
+
         existing_user = User.query.filter_by(email=form.email.data).first()
         if existing_user:
             flash("Email already registered. Please log in.", "warning")
@@ -30,26 +34,12 @@ def register():
             username=form.username.data,
             email=form.email.data
         )
-
-        # -----------------------------
-        # SECURITY WEAKNESS INTRODUCED
-        # -----------------------------
-        # Original secure code used:
-        # user.set_password(form.password.data)
-        #
-        # That function hashes the password before storing it.
-        #
-        # For Week-1 security testing, we intentionally store the password
-        # directly in plaintext to simulate a "Weak Password Storage"
-        # vulnerability.
-        #
-        # Risk: If the database is compromised, attackers can immediately
-        # read all user passwords.
-        user.password = form.password.data
+        user.set_password(form.password.data)
 
         try:
             db.session.add(user)
             db.session.commit()
+
         except IntegrityError:
             db.session.rollback()
             flash("Registration failed. Try a different email.", "danger")
@@ -61,60 +51,81 @@ def register():
     return render_template("register.html", form=form)
 
 
+# -------------------------------
+# Login
+# -------------------------------
 @main.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+
         user = User.query.filter_by(email=form.email.data).first()
 
-        # -----------------------------
-        # SECURITY WEAKNESS INTRODUCED
-        # -----------------------------
-        # Original secure code used:
-        # user.check_password(form.password.data)
-        #
-        # That function compares the password hash safely.
-        #
-        # For the insecure testing version, we directly compare plaintext
-        # passwords. This simulates weak authentication logic and allows
-        # easier password compromise.
-        #
-        # Risk: Attackers could potentially exploit weak password storage
-        # and bypass secure authentication mechanisms.
-        if user and user.password == form.password.data:
+        if user and user.check_password(form.password.data):
             login_user(user)
+            flash("Login successful!", "success")
             return redirect(url_for("main.dashboard"))
 
-        flash("Invalid email or password", "danger")
+        # -------------------------------
+        # SECURITY FEATURE
+        # Log failed login attempts
+        # -------------------------------
+        log = SecurityLog(
+            event_type="failed_login",
+            email=form.email.data,
+            ip_address=request.remote_addr
+        )
+
+        db.session.add(log)
+        db.session.commit()
+
+        # -------------------------------
+        # BRUTE FORCE DETECTION
+        # If same email fails 5+ times
+        # -------------------------------
+        recent_attempts = SecurityLog.query.filter_by(
+            email=form.email.data,
+            event_type="failed_login"
+        ).count()
+
+        if recent_attempts >= 5:
+            brute_log = SecurityLog(
+                event_type="brute_force_attempt",
+                email=form.email.data,
+                ip_address=request.remote_addr
+            )
+            db.session.add(brute_log)
+            db.session.commit()
+
+        flash("Invalid email or password.", "danger")
 
     return render_template("login.html", form=form)
 
 
+# -------------------------------
+# Dashboard
+# -------------------------------
 @main.route("/dashboard")
 @login_required
 def dashboard():
-
-    # -----------------------------
-    # SECURITY WEAKNESS INTRODUCED
-    # -----------------------------
-    # Here we intentionally expose the user's IP address.
-    # While not always critical, unnecessary exposure of
-    # internal or identifying data is considered
-    # "Information Disclosure".
-    #
-    # Risk: Attackers can gather information about the user
-    # environment or infrastructure.
-    return f"You are logged in. Session is active. Your IP: {request.remote_addr}"
+    return "You are logged in. Session is active."
 
 
+# -------------------------------
+# Logout
+# -------------------------------
 @main.route("/logout")
 @login_required
 def logout():
     logout_user()
+    flash("You have been logged out.", "info")
     return redirect(url_for("main.login"))
 
 
+# -------------------------------
+# Admin Panel
+# -------------------------------
 @main.route("/admin")
 @login_required
 
@@ -134,3 +145,6 @@ def logout():
 # functionality.
 def admin_panel():
     return "Welcome Admin. You have elevated privileges."
+
+
+

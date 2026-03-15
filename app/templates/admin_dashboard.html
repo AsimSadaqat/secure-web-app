@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="watermark">
+    Asim Sadaqat<br>
+    Cyber Security Lab
+</div>
+
+<div class="container">
+
+<h2>Admin Security Dashboard</h2>
+
+<p>System monitoring and security overview.</p>
+
+<div class="features">
+
+<p><b>Total Users:</b> {{ total_users }}</p>
+
+<p><b>Failed Login Attempts:</b> {{ failed_logins }}</p>
+
+<p><b>Weak Password Attempts:</b> {{ weak_passwords }}</p>
+
+<p><b>Brute Force Alerts:</b> {{ brute_force_attempts }}</p>
+
+</div>
+
+<div class="center" style="margin-top:20px;">
+
+<a href="{{ url_for('main.dashboard') }}" class="btn">
+Back to User Dashboard
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}
+c

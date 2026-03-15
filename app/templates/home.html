@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Watermark -->
+
+<div class="watermark">
+    Asim Sadaqat<br>
+    Cyber Security Lab
+</div>
+
+<div class="container">
+
+<h1>Secure Web Application</h1>
+
+<p class="welcome-text">
+Welcome to the Cyber Security Testing Lab.
+</p>
+
+<div class="home-buttons">
+
+
+<a href="{{ url_for('main.login') }}" class="btn">Login</a>
+
+<a href="{{ url_for('main.register') }}" class="btn secondary">Register</a>
+
+
+</div>
+
+</div>
+
+{% endblock %}
